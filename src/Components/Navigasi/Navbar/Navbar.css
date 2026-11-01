@@ -1,0 +1,260 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --dark-green: #0b4d2c;
+  --dark-green-2: #06331d;
+  --white: #ffffff;
+  --text-dark: #111827;
+  --amber: #fdb813;
+  --orange: #f2711c;
+  --black: #000000;
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 85px;
+  padding: 0 70px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 9999;
+  transition: 0.35s;
+  font-family: "Poppins", sans-serif;
+}
+
+/* HOME */
+.navbar.transparent {
+  background: transparent;
+}
+
+/* PAGE */
+.navbar.solid {
+  background: #ffffff;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
+}
+
+/* LOGO */
+.logo-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo-img {
+  height: 42px;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: 700;
+  transition: 0.3s;
+}
+
+/* MENU DESKTOP (tidak diubah, tetap tema hijau #009245) */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 35px;
+  list-style: none;
+}
+
+.nav-links a {
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: 0.3s;
+  position: relative;
+}
+
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  bottom: -7px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #009245;
+  transition: 0.3s;
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+  width: 100%;
+}
+
+.nav-links a:hover {
+  color: #009245 !important;
+}
+
+.nav-links a.active {
+  color: #009245 !important;
+}
+
+/* TOGGLE (hamburger -> X) */
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  position: relative;
+  z-index: 10000;
+}
+
+.menu-toggle span {
+  width: 26px;
+  height: 3px;
+  border-radius: 30px;
+  background: var(--dark-green);
+  transition: 0.3s;
+}
+
+/* Saat menu terbuka: hamburger berubah jadi X berwarna hitam */
+.menu-toggle.active span {
+  background: var(--black);
+}
+
+.menu-toggle.active span:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.menu-toggle.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-toggle.active span:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+/* Overlay gelap di belakang panel saat menu mobile terbuka */
+.nav-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(6, 51, 29, 0.45);
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.3s;
+  z-index: 9998;
+}
+
+.nav-overlay.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* ============ MOBILE ============ */
+@media (max-width: 992px) {
+  .navbar {
+    padding: 0 20px;
+    height: 75px;
+  }
+
+  .menu-toggle {
+    display: flex;
+  }
+
+  /* Panel slide-in: tema hijau gelap + putih */
+  .nav-links {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 270px;
+    height: 100vh;
+    background: var(--white);
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.15);
+    padding: 95px 0 30px;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start; /* FIX: sebelumnya space-between, bikin jarak antar-link kejauhan */
+    gap: 0;
+    transform: translateX(100%);
+    transition: 0.35s ease;
+    z-index: 9999;
+  }
+
+  .nav-links.open {
+    transform: translateX(0);
+  }
+
+  .nav-list {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    gap: 4px;
+    padding: 0 14px;
+  }
+
+  .nav-links a {
+    display: block;
+    width: 100%;
+    padding: 14px 18px;
+    border-radius: 10px;
+    color: var(--text-dark) !important;
+    font-weight: 500;
+  }
+
+  /* Item aktif ("Beranda"): kotak solid hijau gelap + aksen oren di kiri */
+  .nav-links a.active {
+    background: var(--dark-green) !important;
+    color: var(--white) !important;
+    font-weight: 600;
+    border-left: 4px solid var(--amber);
+    padding-left: 14px;
+  }
+
+  .nav-links a:hover {
+    background: #eaf3ee;
+    color: var(--dark-green) !important;
+  }
+
+  .nav-links a::after {
+    display: none;
+  }
+
+  /* Area tombol di bagian bawah panel */
+  .nav-bottom {
+    padding: 0 18px;
+    margin-top: auto;
+  }
+
+  /* Tombol Kembali (pengganti Login), aksen kuning ke oren */
+  .btn-kembali {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 13px 0;
+    border: none;
+    border-radius: 30px;
+    background: linear-gradient(135deg, var(--amber), var(--orange));
+    color: var(--dark-green-2);
+    font-family: "Poppins", sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 6px 16px rgba(242, 113, 28, 0.35);
+    transition: 0.3s;
+  }
+
+  .btn-kembali:hover {
+    filter: brightness(1.05);
+    transform: translateY(-1px);
+  }
+
+  .btn-kembali svg {
+    width: 16px;
+    height: 16px;
+  }
+}

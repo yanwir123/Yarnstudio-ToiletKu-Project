@@ -1,0 +1,90 @@
+/* =========================================================
+   FLOATING WHATSAPP BUTTON
+   ---------------------------------------------------------
+   Posisi fixed relatif ke viewport (bukan ke section manapun),
+   jadi selama komponennya dirender di root App, tombol ini akan
+   selalu nempel di pojok layar di semua halaman & saat discroll.
+========================================================= */
+.wa-float-btn {
+  position: fixed;
+  /* PERBAIKAN: sebelumnya nempel mepet di right:22px (pojok banget).
+     Sekarang digeser sedikit ke arah tengah pakai right:56px supaya
+     tombolnya tidak "gantung" persis di ujung layar. */
+  right: 56px;
+  bottom: 30px;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  /* PERBAIKAN: padding & font diperbesar supaya tombol lebih terasa
+     "besar dan jelas", bukan sekadar chip kecil di pojok. */
+  padding: 18px 28px;
+  background: #25d366; /* hijau khas WhatsApp, sengaja beda dari warna
+                            brand supaya user langsung kenal ini tombol chat */
+  color: #fff;
+  border-radius: 999px;
+  text-decoration: none;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-weight: 700;
+  font-size: 1.05rem;
+  white-space: nowrap; /* "Order Sekarang" tetap satu baris rapi */
+  box-shadow: 0 16px 34px rgba(37, 211, 102, 0.38);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.wa-float-btn:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 20px 40px rgba(37, 211, 102, 0.48);
+}
+
+.wa-float-btn svg {
+  font-size: 28px;
+  flex-shrink: 0;
+}
+
+/* Denyut halus biar tombol "memanggil perhatian" tanpa norak */
+@keyframes waPulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.45);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(37, 211, 102, 0);
+  }
+}
+
+.wa-float-btn {
+  animation: waPulse 2.4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wa-float-btn {
+    animation: none;
+  }
+}
+
+/* Di HP, label teks disembunyikan supaya tombol jadi lingkaran besar
+   dan tidak menutupi konten/tombol lain di layar sempit. Posisinya
+   juga sedikit digeser dari pojok mengikuti perubahan versi desktop. */
+@media (max-width: 640px) {
+  .wa-float-btn {
+    right: 24px;
+    bottom: 20px;
+    padding: 16px;
+    border-radius: 50%;
+  }
+
+  .wa-float-label {
+    display: none;
+  }
+
+  .wa-float-btn svg {
+    font-size: 28px;
+  }
+}
+
+/* Kalau nanti ada elemen fixed lain di bawah (mis. bottom nav bar
+   mobile), naikkan posisinya di sini supaya tidak tabrakan, contoh:
+   bottom: 76px; di breakpoint HP kalau tinggi bottom-nav ~60px. */

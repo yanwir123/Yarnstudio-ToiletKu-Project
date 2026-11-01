@@ -1,0 +1,67 @@
+/* ================= LOGO LOOP ================= */
+
+.logo-loop {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.logo-loop::-webkit-scrollbar {
+  display: none;
+}
+
+.logo-track {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+
+  /* PERBAIKAN: dulu width: max-content bikin track cuma sebesar
+     kontennya sendiri lalu nempel kiri (justify-content default
+     flex-start), jadi sisa ruang di kanan kosong.
+     Sekarang track dipaksa full-width & isinya disebar merata. */
+  justify-content: space-evenly;
+  width: 100%;
+
+  gap: 70px;
+  padding: 10px 0;
+}
+
+.logo-item {
+  flex: 0 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo-item svg {
+  width: 80px;
+  height: 80px;
+  color: #64748b;
+  transition: 0.3s;
+}
+
+.logo-item:hover svg {
+  color: var(--teal);
+  transform: translateY(-6px) scale(1.08);
+}
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 768px) {
+  .logo-track {
+    /* balik ke perilaku lama khusus mobile: track menyusut sesuai
+       konten dan rata kiri, supaya scroll horizontal (swipe) tetap
+       jalan natural seperti sebelumnya */
+    justify-content: flex-start;
+    width: max-content;
+    gap: 25px;
+  }
+
+  .logo-item svg {
+    width: 55px;
+    height: 55px;
+  }
+}

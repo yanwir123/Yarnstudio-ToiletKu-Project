@@ -1,0 +1,944 @@
+/* ================================================
+   ABOUT SECTION - ToiletKU
+   ================================================ */
+
+.about {
+  /* 🎨 COLOR TOKENS */
+  --color-bg: #ffffff;
+  --color-surface: #f4f6f8; /* background card/info-box, dibedain dari bg utama */
+  --color-border: #e5e9ed; /* border tipis pengganti/pendukung shadow */
+  --color-text: #1e293b;
+  --color-text-muted: rgba(30, 41, 59, 0.72);
+  --color-accent: #0f6b47; /* hijau, senada logo truck ToiletKU */
+  --color-accent-light: #6fe3a5; /* aksen hijau terang, dipakai di atas foto gelap */
+  --color-accent-soft: #d9e9df; /* aksen lembut, kalau perlu bg badge dll */
+  --color-line: #1e293b;
+  --color-line-soft: #d1d5db;
+  --shadow-card: 0 8px 24px rgba(15, 23, 42, 0.06);
+  --shadow-card-hover: 0 14px 32px rgba(15, 23, 42, 0.1);
+
+  /* 🔧 WAJIB DICEK: samain dengan tinggi asli .navbar di Navbar.css.
+     Dipakai buat kasih jarak aman ke section-section SETELAH hero, supaya
+     nggak ketutup navbar fixed. Hero sendiri sengaja TIDAK pakai jarak ini
+     (lihat .about-hero) karena fotonya harus full sampai ke paling atas,
+     nempel/tembus di belakang navbar yang transparan. */
+  --navbar-height: 104px;
+
+  /* jarak horizontal konten (dipakai juga sebagai acuan padding hero) */
+  --section-px: 140px;
+  --section-gap-top: 60px;
+
+  padding-top: calc(var(--navbar-height) + var(--section-gap-top));
+  padding-right: var(--section-px);
+  padding-bottom: 120px;
+  padding-left: var(--section-px);
+
+  background: var(--color-bg);
+  font-family: "Poppins", sans-serif;
+  color: var(--color-text);
+  overflow-x: hidden;
+}
+
+/* ================= HERO BACKGROUND ================= */
+.about-hero {
+  position: relative;
+  left: 50%;
+  width: 100vw;
+  margin-left: -50vw;
+
+  /* 🔧 DIUBAH: dulu cuma naik sebagian (nyisain strip putih di bawah navbar).
+     Sekarang naik PENUH sampai y=0 (paling atas halaman), supaya foto
+     benar-benar full dan kelihatan di belakang navbar yang transparan
+     sebelum di-scroll. */
+  margin-top: calc(-1 * (var(--navbar-height) + var(--section-gap-top)));
+  margin-bottom: 80px;
+
+  /* tinggi otomatis menyesuaikan layar, TAPI dibatasi biar ga kegedean.
+     Ditambah navbar-height karena sekarang area navbar ikut "dimakan" foto. */
+  min-height: calc(clamp(260px, 46vh, 480px) + var(--navbar-height));
+
+  /* 🔧 GANTI nama file di baris bawah ini sesuai foto background kamu */
+  background-image: url("../../assets/Picture/Unit\ Oprasional.jpeg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  overflow: hidden;
+}
+
+/* Lapisan gelap transparan DI ATAS foto, supaya logo & teks putih tetap kebaca.
+   Kalau mau overlay lebih gelap/terang, tinggal ubah angka opacity (0.25 / 0.55 / 0.82) di bawah. */
+.about-hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    180deg,
+    rgba(15, 23, 42, 0.45) 0%,
+    rgba(15, 23, 42, 0.5) 45%,
+    rgba(15, 23, 42, 0.82) 100%
+  );
+}
+
+/* Logo melayang di atas-tengah foto */
+.about-logo {
+  position: absolute;
+  top: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 0;
+}
+
+.about-logo img {
+  height: 92px;
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.4));
+}
+
+/* Judul + teks, disematkan di bagian bawah foto */
+/* 🔧 FIX ALIGNMENT: sebelumnya ada `max-width: 1200px; margin: 0 auto;`
+   yang bikin box ini ke-center di dalam .about-hero (full-width 100vw).
+   Efeknya padding-left dihitung dari tepi kotak 1200px yang sudah
+   ke-center, BUKAN dari tepi viewport — jadi teks "TENTANG KAMI" &
+   paragrafnya geser ke kanan dan nggak sejajar sama Visi/Misi di bawahnya
+   (yang paddingnya dihitung dari .about, full-width, nempel tepi viewport).
+   Setelah max-width & margin auto dihapus, padding-left var(--section-px)
+   di sini jadi konsisten dengan padding-left var(--section-px) di .about,
+   sehingga sejajar sempurna. Paragraf tetap aman karena .about-hero-content p
+   sudah punya max-width: 700px sendiri. */
+.about-hero-content {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  width: 100%;
+  padding: 40px var(--section-px) 44px;
+  color: #ffffff;
+}
+
+.about-hero-content h1 {
+  font-size: 44px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+  color: #ffffff;
+}
+
+.about-hero-content .line {
+  background: var(--color-accent-light);
+  margin: 8px 0 20px;
+}
+
+.about-hero-content p {
+  font-size: 17px;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.92);
+  max-width: 700px;
+  text-align: justify;
+}
+
+.about-hero-content strong {
+  color: var(--color-accent-light);
+}
+
+/* ================= VISI MISI ================= */
+/* 🔧 DIUBAH: dari ditumpuk ke bawah (column) jadi 2 kolom sejajar (row),
+   nempel kiri (bukan di-center), tema flat tanpa card. */
+.visi-misi {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 90px;
+  width: 100%;
+  max-width: 1100px;
+  margin: 40px 0 120px;
+}
+
+/* 🔧 DIUBAH: tema flat, card dihapus total — nggak ada background,
+   border, radius, shadow, ataupun hover animasi. Cuma teks + garis tipis. */
+.visi,
+.misi {
+  flex: 1 1 0;
+  min-width: 0;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  box-shadow: none;
+}
+
+.visi h2,
+.misi h2 {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: var(--color-text);
+}
+
+.line-small {
+  width: 100%;
+  max-width: 260px;
+  height: 1px;
+  background: var(--color-line-soft);
+  margin-bottom: 24px;
+}
+
+.visi p {
+  font-size: 17px;
+  line-height: 1.9;
+  color: var(--color-text-muted);
+}
+
+.misi ul {
+  list-style: none;
+  padding: 0;
+}
+
+.misi li {
+  font-size: 17px;
+  margin-bottom: 14px;
+  padding-left: 24px;
+  position: relative;
+  line-height: 1.7;
+  color: var(--color-text-muted);
+}
+
+.misi li::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  color: var(--color-text);
+}
+
+/* ================= UNIT OPERASIONAL ================= */
+.unit-section {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 70px;
+  margin-bottom: 120px;
+}
+
+.unit-photo,
+.unit-text {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.unit-photo img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  border-radius: 20px;
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-card);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.unit-photo img:hover {
+  transform: scale(1.02);
+  box-shadow: var(--shadow-card-hover);
+}
+
+.unit-text h2 {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: var(--color-text);
+}
+
+.unit-text p {
+  font-size: 17px;
+  line-height: 1.9;
+  color: var(--color-text-muted);
+  margin-bottom: 22px;
+}
+
+.unit-text strong {
+  color: var(--color-accent);
+}
+
+.unit-points {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.unit-points li {
+  position: relative;
+  padding-left: 28px;
+  font-size: 16px;
+  color: var(--color-text);
+}
+
+.unit-points li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--color-accent);
+  font-weight: 700;
+}
+
+/* ================= PENGELOLA (redesign) ================= */
+.pengelola-section {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  gap: 70px;
+  margin-bottom: 120px;
+}
+
+.pengelola-text,
+.pengelola-photo {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.pengelola-text h2 {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: var(--color-text);
+}
+
+.pengelola-text p {
+  font-size: 17px;
+  line-height: 1.9;
+  color: var(--color-text-muted);
+  margin-bottom: 15px;
+}
+
+.pengelola-photo img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  border-radius: 20px;
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-card);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.pengelola-photo img:hover {
+  transform: scale(1.02);
+  box-shadow: var(--shadow-card-hover);
+}
+
+.pengelola-stats {
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+  margin-top: 28px;
+  padding-top: 28px;
+  border-top: 1px solid var(--color-line-soft);
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.stat-number {
+  font-size: 30px;
+  font-weight: 700;
+  color: var(--color-accent);
+}
+
+.stat-label {
+  font-size: 14px;
+  color: var(--color-text-muted);
+}
+
+/* ================= RATING & REVIEW ================= */
+.review-section {
+  margin-bottom: 60px;
+}
+
+.review-content {
+  display: flex;
+  flex-direction: row;
+  gap: 90px;
+  margin-bottom: 50px;
+}
+
+.review-overall {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  flex: 0 0 auto;
+  min-width: 200px;
+}
+
+.review-overall-number {
+  font-size: 56px;
+  font-weight: 700;
+  color: var(--color-text);
+  line-height: 1;
+}
+
+.review-overall-caption {
+  font-size: 14px;
+  color: var(--color-text-muted);
+}
+
+.review-categories {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+/* 🔧 FIX MOBILE ALIGNMENT: sebelumnya container ini punya `flex-wrap: wrap`
+   di breakpoint mobile. Efeknya, kalau label kategori kepanjangan (misal
+   "Kerapihan & Kebersihan Pengerjaan") dan nggak muat sejajar dengan
+   bintangnya, SELURUH blok bintang+angka ikut "terlempar" turun ke baris
+   baru sendirian — jadi satu baris itu keliatan beda/nggak sejajar
+   dibanding baris lain.
+   Sekarang: container dikunci `nowrap` (tetap 1 baris flex row), label
+   (.category-label) yang boleh membungkus teksnya sendiri ke 2 baris kalau
+   perlu (flex:1 1 auto + min-width:0), sementara bintang+angka
+   (.category-rating) dikunci nggak pernah pecah & selalu nempel di kanan
+   (flex-shrink:0 + white-space:nowrap). Hasilnya semua baris konsisten:
+   bintang selalu sejajar di kanan, nggak ada yang loncat ke bawah lagi. */
+.review-category {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  gap: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--color-line-soft);
+}
+
+.review-category:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.category-label {
+  font-size: 16px;
+  color: var(--color-text);
+  flex: 1 1 auto;
+  min-width: 0; /* wajib, biar teks panjang boleh wrap sendiri, bukan malah dorong sibling */
+}
+
+.category-rating {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0; /* nggak boleh mengecil/pecah, selalu utuh di kanan */
+  white-space: nowrap;
+}
+
+.category-value {
+  font-size: 14px;
+  color: var(--color-text-muted);
+  min-width: 28px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+/* Bintang rating dengan fill sesuai persentase nilai (mendukung angka desimal) */
+.stars {
+  position: relative;
+  display: inline-block;
+  flex-shrink: 0;
+  font-size: 20px;
+  line-height: 1;
+  letter-spacing: 2px;
+  color: var(--color-line-soft);
+}
+
+.stars::before {
+  content: "★★★★★";
+}
+
+.stars-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  color: var(--color-accent);
+}
+
+.stars-fill::before {
+  content: "★★★★★";
+}
+
+/* Galeri foto hasil pengerjaan */
+.review-gallery {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.review-photo img {
+  width: 100%;
+  height: 220px;
+  display: block;
+  object-fit: cover;
+  border-radius: 16px;
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-card);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.review-photo img:hover {
+  transform: scale(1.03);
+  box-shadow: var(--shadow-card-hover);
+}
+
+/* ================= SECTION TITLE ================= */
+/* 🔧 DIUBAH: dari center ke kiri, biar sejajar sama .info-box di bawahnya
+   yang sekarang juga rata kiri. */
+.about-section {
+  text-align: left;
+  margin-bottom: 60px;
+}
+
+.about-section h2 {
+  font-size: 34px;
+  margin-bottom: 20px;
+  color: var(--color-text);
+}
+
+/* ================= INFO BOX (Pengelola & Kenapa Memilih) ================= */
+/* 🔧 DIUBAH: card dihapus total (background/border/shadow/radius/padding),
+   dan posisinya rata kiri (bukan di-center) — teks polos kayak referensi. */
+/* 🔧 DIUBAH: khusus section "Kenapa Memilih ToiletKU?" ini di-center
+   (rata tengah), beda dari section lain yang tetap rata kiri. */
+.info-box {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  max-width: 800px;
+  margin: 0 auto 60px;
+  box-shadow: none;
+  text-align: center;
+}
+
+.info-box h2 {
+  margin-bottom: 20px;
+  color: var(--color-text);
+}
+
+.info-box p {
+  line-height: 1.9;
+  font-size: 17px;
+  color: var(--color-text-muted);
+  margin-bottom: 15px;
+  text-align: justify;
+}
+
+.info-box p:last-child {
+  margin-bottom: 0;
+}
+
+.info-box strong {
+  color: var(--color-text);
+  font-weight: 700;
+}
+
+/* ================= IMAGE ================= */
+.about-image {
+  text-align: center;
+  margin-top: 0;
+}
+
+.about-image img {
+  width: 65%;
+  max-width: 550px;
+  border-radius: 20px;
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-card);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.about-image img:hover {
+  transform: scale(1.03);
+  box-shadow: var(--shadow-card-hover);
+}
+
+/* ================= ANIMATION ================= */
+.about-hero-content,
+.visi,
+.misi,
+.info-box,
+.unit-section,
+.pengelola-section,
+.review-section {
+  animation: fadeUp 0.8s ease;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ================================================
+   RESPONSIVE
+   ================================================ */
+
+/* TABLET */
+@media (max-width: 1024px) {
+  .about {
+    --navbar-height: 100px;
+    --section-px: 60px;
+    --section-gap-top: 40px;
+    padding-top: calc(var(--navbar-height) + var(--section-gap-top));
+    padding-right: var(--section-px);
+    padding-bottom: 100px;
+    padding-left: var(--section-px);
+  }
+
+  .about-hero {
+    margin-top: calc(-1 * (var(--navbar-height) + var(--section-gap-top)));
+    margin-bottom: 60px;
+    min-height: calc(clamp(220px, 40vh, 400px) + var(--navbar-height));
+  }
+
+  .about-logo {
+    top: 24px;
+  }
+
+  .about-logo img {
+    height: 76px;
+  }
+
+  .about-hero-content {
+    padding: 34px var(--section-px) 36px;
+  }
+
+  .about-hero-content h1 {
+    font-size: 38px;
+  }
+
+  .about-hero-content p {
+    font-size: 16px;
+  }
+
+  /* 🔧 Di layar sempit, 2 kolom sejajar dibalik jadi tumpuk ke bawah
+     biar teks nggak kegencet. */
+  .visi-misi {
+    flex-direction: column;
+    gap: 40px;
+    max-width: 620px;
+  }
+
+  .visi h2,
+  .misi h2 {
+    font-size: 28px;
+  }
+
+  .visi p,
+  .misi li {
+    font-size: 16px;
+  }
+
+  .about-section h2 {
+    font-size: 30px;
+  }
+
+  .info-box p {
+    font-size: 16px;
+  }
+
+  /* 🔧 Foto + teks yang tadinya sejajar, di tablet ditumpuk ke bawah */
+  .unit-section,
+  .pengelola-section {
+    flex-direction: column;
+    gap: 32px;
+    margin-bottom: 90px;
+  }
+
+  .pengelola-photo {
+    width: 100%;
+  }
+
+  .review-content {
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .review-gallery {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* MOBILE (≤768px) */
+@media (max-width: 768px) {
+  .about {
+    --navbar-height: 88px;
+    --section-px: 20px;
+    --section-gap-top: 30px;
+    padding-top: calc(var(--navbar-height) + var(--section-gap-top));
+    padding-right: var(--section-px);
+    padding-bottom: 80px;
+    padding-left: var(--section-px);
+  }
+
+  .about-hero {
+    margin-top: calc(-1 * (var(--navbar-height) + var(--section-gap-top)));
+    margin-bottom: 50px;
+    min-height: calc(clamp(200px, 36vh, 340px) + var(--navbar-height));
+  }
+
+  .about-logo {
+    top: 18px;
+  }
+
+  .about-logo img {
+    height: 60px;
+  }
+
+  .about-hero-content {
+    padding: 22px var(--section-px) 26px;
+  }
+
+  .about-hero-content h1 {
+    font-size: 28px;
+  }
+
+  .about-hero-content .line {
+    margin: 6px 0 14px;
+  }
+
+  .about-hero-content p {
+    font-size: 15px;
+    line-height: 1.75;
+  }
+
+  .visi-misi {
+    gap: 24px;
+    margin-top: 30px;
+    margin-bottom: 80px;
+  }
+
+  .visi h2,
+  .misi h2 {
+    font-size: 24px;
+  }
+
+  .visi p,
+  .misi li {
+    font-size: 16px;
+  }
+
+  .about-section h2 {
+    font-size: 28px;
+  }
+
+  .info-box {
+    margin-bottom: 50px;
+  }
+
+  .info-box p {
+    font-size: 16px;
+  }
+
+  .about-image img {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .unit-section,
+  .pengelola-section {
+    gap: 24px;
+    margin-bottom: 70px;
+  }
+
+  .unit-text h2,
+  .pengelola-text h2 {
+    font-size: 24px;
+  }
+
+  .unit-text p,
+  .pengelola-text p {
+    font-size: 16px;
+  }
+
+  .pengelola-stats {
+    gap: 28px;
+    flex-wrap: wrap;
+  }
+
+  .stat-number {
+    font-size: 26px;
+  }
+
+  .review-overall-number {
+    font-size: 46px;
+  }
+
+  /* 🔧 FIX: sebelumnya ada `flex-wrap: wrap;` di sini yang jadi biang
+     kerok bintang "loncat" ke baris bawah kalau labelnya panjang.
+     Sekarang cukup rapatkan gap & bintangnya diperkecil dikit
+     (lihat .stars & .category-value di bawah) supaya lebih longgar,
+     tapi baris tetap 1 baris flex row (nowrap dari rule utama). */
+  .review-category {
+    gap: 10px;
+  }
+
+  .stars {
+    font-size: 18px;
+    letter-spacing: 1px;
+  }
+
+  .category-value {
+    min-width: 24px;
+  }
+
+  .review-gallery {
+    gap: 14px;
+  }
+
+  .review-photo img {
+    height: 160px;
+  }
+}
+
+/* MOBILE KECIL (≤480px) */
+@media (max-width: 480px) {
+  .about {
+    --navbar-height: 76px;
+    --section-px: 16px;
+    --section-gap-top: 24px;
+    padding-top: calc(var(--navbar-height) + var(--section-gap-top));
+    padding-right: var(--section-px);
+    padding-bottom: 60px;
+    padding-left: var(--section-px);
+  }
+
+  .about-hero {
+    margin-top: calc(-1 * (var(--navbar-height) + var(--section-gap-top)));
+    margin-bottom: 40px;
+    min-height: calc(clamp(190px, 32vh, 280px) + var(--navbar-height));
+  }
+
+  .about-logo {
+    top: 14px;
+  }
+
+  .about-logo img {
+    height: 50px;
+  }
+
+  .about-hero-content {
+    padding: 16px var(--section-px) 20px;
+  }
+
+  .about-hero-content h1 {
+    font-size: 22px;
+  }
+
+  .about-hero-content p {
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  .visi h2,
+  .misi h2 {
+    font-size: 23px;
+  }
+
+  .about-section h2 {
+    font-size: 24px;
+  }
+
+  .misi li {
+    font-size: 15px;
+    padding-left: 20px;
+  }
+
+  .visi p {
+    font-size: 15px;
+  }
+
+  .info-box {
+    margin-bottom: 40px;
+  }
+
+  .info-box p {
+    font-size: 15px;
+    line-height: 1.8;
+  }
+
+  .about-image img {
+    border-radius: 14px;
+  }
+
+  .unit-text p,
+  .pengelola-text p {
+    font-size: 15px;
+  }
+
+  .unit-points li {
+    font-size: 15px;
+  }
+
+  .pengelola-stats {
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .review-overall-number {
+    font-size: 40px;
+  }
+
+  .review-category {
+    gap: 8px;
+  }
+
+  .category-label {
+    font-size: 15px;
+  }
+
+  /* 🔧 Bintang diperkecil lagi khusus layar sangat sempit, biar
+     "Kerapihan & Kebersihan Pengerjaan" tetap punya ruang cukup buat
+     bintang di kanan tanpa perlu ke-wrap ke baris baru terpisah. */
+  .stars {
+    font-size: 15px;
+    letter-spacing: 0.5px;
+  }
+
+  .category-value {
+    font-size: 13px;
+    min-width: 22px;
+  }
+
+  .review-gallery {
+    grid-template-columns: 1fr;
+  }
+
+  .review-photo img {
+    height: 200px;
+  }
+}

@@ -1,0 +1,383 @@
+.contact {
+  /* 🎨 COLOR TOKENS — disamain persis dengan About.css biar satu tema */
+  --color-bg: #ffffff;
+  --color-surface: #f4f6f8;
+  --color-border: #e5e9ed;
+  --color-text: #1e293b;
+  --color-text-muted: rgba(30, 41, 59, 0.72);
+  --color-accent: #0f6b47; /* hijau tua */
+  --color-accent-light: #6fe3a5; /* hijau terang, aksen sekunder */
+  --color-accent-soft: #d9e9df; /* hijau lembut, bg badge/icon */
+  --color-line-soft: #d1d5db;
+  --shadow-card: 0 8px 24px rgba(15, 23, 42, 0.06);
+  --shadow-card-hover: 0 14px 32px rgba(15, 23, 42, 0.1);
+
+  padding: 70px 100px;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: "Poppins", sans-serif;
+}
+
+/* ================= HERO ================= */
+.contact-hero {
+  margin-top: 40px;
+  margin-bottom: 60px;
+}
+
+.contact-text h1 {
+  font-size: 42px;
+  font-weight: 700;
+  margin-bottom: 0;
+  letter-spacing: -0.5px;
+  color: var(--color-text);
+}
+
+/* garis aksen hijau di bawah judul */
+.contact-text h1::after {
+  content: "";
+  display: block;
+  width: 64px;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--color-accent);
+  margin: 14px 0 20px;
+}
+
+.contact-text p {
+  font-size: 16px;
+  color: var(--color-text-muted);
+  max-width: 520px;
+  line-height: 1.7;
+}
+
+.contact-text strong {
+  color: var(--color-accent);
+}
+
+/* ================= GRID ================= */
+.contact-container {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 40px;
+  align-items: start;
+}
+
+/* ================= LEFT: INFO CARD ================= */
+.contact-info {
+  padding: 40px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 20px;
+  box-shadow: var(--shadow-card);
+  transition: box-shadow 0.3s ease;
+}
+
+.contact-info:hover {
+  box-shadow: var(--shadow-card-hover);
+}
+
+.contact-info h2 {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 0;
+  color: var(--color-text);
+}
+
+.contact-info p {
+  font-size: 14px;
+  color: var(--color-text-muted);
+  margin: 16px 0 26px;
+  line-height: 1.7;
+}
+
+/* ITEM */
+.info-item {
+  margin-bottom: 18px;
+}
+
+.info-item strong {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.info-item strong svg {
+  color: var(--color-accent);
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.info-item span {
+  font-size: 14px;
+  color: var(--color-text);
+  line-height: 1.6;
+}
+
+/* LINK */
+.info-item a {
+  color: var(--color-accent);
+  text-decoration: none;
+  transition: 0.2s;
+}
+
+.info-item a:hover {
+  text-decoration: underline;
+}
+
+/* ========================= */
+/* SOCIAL ICON — tema hijau gelap konsisten untuk semua ikon */
+/* ========================= */
+
+.social-icons {
+  display: flex;
+  gap: 12px;
+  margin-top: 6px;
+}
+
+.social-icons a {
+  all: unset; /* biar gak kena global CSS */
+
+  width: 42px;
+  height: 42px;
+  aspect-ratio: 1 / 1;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+  background: var(--color-accent-soft);
+
+  color: var(--color-accent);
+  font-size: 18px;
+
+  border: 1px solid var(--color-border);
+
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* HOVER — satu warna aksen hijau tua untuk semua ikon, senada tema */
+.social-icons a:hover {
+  transform: translateY(-3px) scale(1.05);
+  background: var(--color-accent);
+  color: #ffffff;
+  border-color: var(--color-accent);
+  box-shadow: var(--shadow-card-hover);
+}
+
+/* MAP */
+.map {
+  margin-top: 25px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+}
+
+/* ================= RIGHT: FORM CARD ================= */
+.contact-form {
+  padding: 40px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 20px;
+  box-shadow: var(--shadow-card);
+  transition: box-shadow 0.3s ease;
+}
+
+.contact-form:hover {
+  box-shadow: var(--shadow-card-hover);
+}
+
+.contact-info h2,
+.contact-form h2 {
+  position: relative;
+}
+
+.contact-form h2 {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: 0;
+}
+
+/* garis aksen hijau kecil di bawah tiap heading kartu */
+.contact-info h2::after,
+.contact-form h2::after {
+  content: "";
+  width: 40px;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--color-accent);
+  display: block;
+  margin-top: 10px;
+}
+
+.contact-form h2::after {
+  margin-bottom: 26px;
+}
+
+/* GRID FORM */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 26px 30px;
+}
+
+.full-width {
+  grid-column: span 2;
+}
+
+/* LABEL */
+.contact-form label {
+  font-size: 12px;
+  display: block;
+  margin-bottom: 6px;
+  color: var(--color-text-muted);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* INPUT, SELECT, TEXTAREA — disamain semua, termasuk select yang kelewat sebelumnya */
+.contact-form input,
+.contact-form select,
+.contact-form textarea {
+  width: 100%;
+  border: none;
+  border-bottom: 1.5px solid var(--color-line-soft);
+  padding: 10px 0;
+  font-size: 14px;
+  font-family: inherit;
+  color: var(--color-text);
+  outline: none;
+  background: transparent;
+  border-radius: 0;
+  transition: border-color 0.3s ease;
+}
+
+.contact-form select {
+  cursor: pointer;
+}
+
+/* FOCUS EFFECT — hijau tua */
+.contact-form input:focus,
+.contact-form select:focus,
+.contact-form textarea:focus {
+  border-bottom-color: var(--color-accent);
+}
+
+/* TEXTAREA — tinggi disesuaikan per field (pakai atribut rows dari JSX),
+   biar nggak ada spasi kosong nganggur kayak sebelumnya di Alamat Lokasi */
+.contact-form textarea {
+  resize: none;
+}
+
+.contact-form textarea[rows="3"] {
+  min-height: 72px; /* Alamat Lokasi — field pendek */
+}
+
+.contact-form textarea[rows="5"] {
+  min-height: 120px; /* Keterangan — field panjang */
+}
+
+/* BUTTON GROUP — tombol utama (WhatsApp) & sekunder (Email) berdampingan */
+.form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 10px;
+}
+
+.contact-form button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 24px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  font-size: 14px;
+  font-family: inherit;
+  letter-spacing: 0.5px;
+}
+
+/* Tombol utama: kirim ke WhatsApp — solid hijau tua */
+.btn-primary {
+  border: 1.5px solid var(--color-accent);
+  background: var(--color-accent);
+  color: #ffffff;
+}
+
+.btn-primary:hover {
+  background: #0b5738;
+  border-color: #0b5738;
+  box-shadow: var(--shadow-card-hover);
+}
+
+/* Tombol sekunder: kirim ke Email — outline lembut */
+.btn-secondary {
+  border: 1.5px solid var(--color-border);
+  background: transparent;
+  color: var(--color-text-muted);
+}
+
+.btn-secondary:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+/* ================================================
+   RESPONSIVE
+   ================================================ */
+@media (max-width: 900px) {
+  .contact {
+    padding: 50px 20px;
+  }
+
+  .contact-text h1 {
+    font-size: 34px;
+  }
+
+  .contact-container {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .contact-info,
+  .contact-form {
+    padding: 28px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .full-width {
+    grid-column: span 1;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact {
+    padding: 40px 16px;
+  }
+
+  .contact-text h1 {
+    font-size: 28px;
+  }
+
+  .contact-info,
+  .contact-form {
+    padding: 22px;
+    border-radius: 16px;
+  }
+}

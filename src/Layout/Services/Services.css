@@ -1,0 +1,397 @@
+/* ================================================
+   SERVICES SECTION - ToiletKU
+   ================================================ */
+
+.services {
+  /* 🎨 COLOR TOKENS (samain dengan About.css biar konsisten) */
+  --color-bg: #ffffff;
+  --color-surface: #f4f6f8;
+  --color-border: #e5e9ed;
+  --color-text: #1e293b;
+  --color-text-muted: rgba(30, 41, 59, 0.72);
+  --color-accent: #0f6b47;
+  --color-accent-soft: #d9e9df;
+  --shadow-card: 0 8px 24px rgba(15, 23, 42, 0.06);
+  --shadow-card-hover: 0 14px 32px rgba(15, 23, 42, 0.1);
+
+  /* 🔧 SESUAIKAN dengan tinggi asli .navbar di Navbar.css */
+  --navbar-height: 90px;
+
+  padding-top: calc(var(--navbar-height) + 60px);
+  padding-right: 140px;
+  padding-bottom: 120px;
+  padding-left: 140px;
+
+  background: var(--color-bg);
+  font-family: "Poppins", sans-serif;
+  color: var(--color-text);
+  overflow-x: hidden;
+}
+
+/* ================= HERO ================= */
+.services-hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 60px;
+  max-width: 1200px;
+  margin: 0 auto 140px;
+}
+
+.hero-text {
+  flex: 1;
+  max-width: 520px;
+}
+
+.hero-text h1 {
+  font-size: 52px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin-bottom: 20px;
+  color: var(--color-text);
+}
+
+.hero-text p {
+  font-size: 18px;
+  line-height: 1.9;
+  color: var(--color-text-muted);
+  margin-bottom: 32px;
+}
+
+.hero-text strong {
+  color: var(--color-accent);
+}
+
+.hero-cta {
+  display: inline-block;
+  background: var(--color-accent);
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
+  padding: 16px 36px;
+  border-radius: 999px;
+  box-shadow: var(--shadow-card);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease;
+}
+
+.hero-cta:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-card-hover);
+  background: #0c5638;
+}
+
+.hero-image {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.hero-image img {
+  width: 100%;
+  max-width: 480px;
+  border-radius: 24px;
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-card);
+}
+
+/* ================= SERVICES LIST ================= */
+.services-list {
+  display: flex;
+  flex-direction: column;
+  gap: 100px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.service-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 60px;
+  animation: fadeUp 0.8s ease both;
+}
+
+.service-row.reverse {
+  flex-direction: row-reverse;
+}
+
+.service-text {
+  flex: 1;
+  max-width: 520px;
+}
+
+.service-text h2 {
+  font-size: 30px;
+  margin-bottom: 16px;
+  color: var(--color-text);
+}
+
+.service-text p {
+  font-size: 17px;
+  line-height: 1.9;
+  color: var(--color-text-muted);
+  margin-bottom: 22px;
+}
+
+.service-text ul {
+  list-style: none;
+  padding: 0;
+}
+
+.service-text li {
+  font-size: 16px;
+  line-height: 1.7;
+  padding-left: 30px;
+  position: relative;
+  margin-bottom: 12px;
+  color: var(--color-text);
+}
+
+.service-text li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--color-accent-soft);
+  color: var(--color-accent);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.service-image {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+/* 🔧 DIUBAH: foto (layanan 1-5) & video (layanan 6-10) sekarang di-treat SAMA PERSIS
+   pakai selector gabungan, biar ukurannya konsisten 1:1 (aspect-ratio + object-fit: cover),
+   nggak gepeng/distorsi — cuma di-crop rapi ke tengah oleh object-fit: cover.
+   background: #000 dipasang di video sebagai fallback warna sebelum frame pertama tampil. */
+.service-image img,
+.service-image video {
+  width: 100%;
+  max-width: 440px;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 20px;
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-card);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.service-image video {
+  background: #000;
+}
+
+.service-image img:hover,
+.service-image video:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-card-hover);
+}
+
+/* ================= ANIMATION ================= */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ================================================
+   RESPONSIVE
+   ================================================ */
+
+/* TABLET */
+@media (max-width: 1024px) {
+  .services {
+    --navbar-height: 90px;
+    padding-top: calc(var(--navbar-height) + 40px);
+    padding-right: 60px;
+    padding-bottom: 100px;
+    padding-left: 60px;
+  }
+
+  .services-hero {
+    gap: 40px;
+    margin-bottom: 110px;
+  }
+
+  .hero-text h1 {
+    font-size: 44px;
+  }
+
+  .hero-text p {
+    font-size: 17px;
+  }
+
+  .services-list {
+    gap: 80px;
+  }
+
+  .service-row,
+  .service-row.reverse {
+    gap: 40px;
+  }
+
+  .service-text h2 {
+    font-size: 27px;
+  }
+
+  .service-text p,
+  .service-text li {
+    font-size: 16px;
+  }
+}
+
+/* MOBILE (≤768px) */
+@media (max-width: 768px) {
+  .services {
+    --navbar-height: 80px;
+    padding-top: calc(var(--navbar-height) + 30px);
+    padding-right: 20px;
+    padding-bottom: 80px;
+    padding-left: 20px;
+  }
+
+  .services-hero {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    gap: 40px;
+    margin-bottom: 80px;
+  }
+
+  /* LOGO/GAMBAR HERO DIPINDAH KE ATAS DI MOBILE */
+  .hero-image {
+    order: -1;
+    margin-bottom: 10px;
+  }
+
+  .hero-text {
+    order: 2;
+    max-width: 100%;
+  }
+
+  .hero-text h1 {
+    font-size: 36px;
+  }
+
+  .hero-text p {
+    font-size: 16px;
+    margin-bottom: 24px;
+  }
+
+  .hero-image img {
+    max-width: 220px;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .services-list {
+    gap: 60px;
+  }
+
+  .service-row,
+  .service-row.reverse {
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+    gap: 24px;
+  }
+
+  /* TEKS & MEDIA (FOTO/VIDEO) DISAMAKAN LEBARNYA BIAR RATA/SEJAJAR */
+  .service-text,
+  .service-image {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .service-text h2 {
+    font-size: 26px;
+  }
+
+  .service-text p {
+    font-size: 16px;
+  }
+
+  .service-text ul {
+    display: inline-block;
+    text-align: left;
+  }
+
+  .service-text li {
+    font-size: 16px;
+  }
+
+  /* 🔧 DIUBAH: foto & video tetap 1:1 (dulu 4:3) biar konsisten sama breakpoint lain */
+  .service-image img,
+  .service-image video {
+    width: 100%;
+    max-width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 18px;
+  }
+}
+
+/* MOBILE KECIL (≤480px) */
+@media (max-width: 480px) {
+  .services {
+    --navbar-height: 70px;
+    padding-top: calc(var(--navbar-height) + 24px);
+    padding-right: 16px;
+    padding-bottom: 60px;
+    padding-left: 16px;
+  }
+
+  .hero-text h1 {
+    font-size: 30px;
+  }
+
+  .hero-text p {
+    font-size: 15px;
+  }
+
+  .hero-cta {
+    padding: 14px 28px;
+    font-size: 15px;
+  }
+
+  .hero-image img {
+    max-width: 160px;
+  }
+
+  .service-text h2 {
+    font-size: 22px;
+  }
+
+  .service-text p,
+  .service-text li {
+    font-size: 15px;
+  }
+
+  /* 🔧 DIUBAH: foto & video tetap 1:1 (dulu 4:3), radius sedikit dikecilkan */
+  .service-image img,
+  .service-image video {
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 14px;
+  }
+}

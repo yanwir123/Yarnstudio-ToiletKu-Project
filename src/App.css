@@ -1,0 +1,51 @@
+/* =========================== RESET & GLOBAL =========================== */
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  font-family: "Inter", sans-serif;
+  background: #000;
+}
+
+/* =========================== LAYOUT =========================== */
+.layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* MAIN CONTENT (PENTING BANGET) */
+.main-content {
+  flex: 1;
+  width: 100%;
+  padding-top: 100px; /* ruang untuk navbar */
+
+  /* FIX UTAMA */
+  height: auto !important;
+  overflow: visible !important;
+}
+
+/* FULLSCREEN PAGE */
+.fullscreen {
+  padding-top: 100px;
+}
+
+/* =========================== BEAMS BACKGROUND =========================== */
+.beams-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.beams-container {
+  width: 100% !important;
+  height: 100% !important;
+}
